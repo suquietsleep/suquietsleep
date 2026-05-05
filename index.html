@@ -28,7 +28,7 @@
       --gold-dim:  #7a6028;
       --cream:     #ede8dc;
       --text:      #d5d1c9;   /* main readable text */
-      --body:      #b8b4ac;   /* body paragraphs — legible warm gray */
+      --body:      #e8e4dc;   /* body paragraphs — near-white, clearly readable */
       --mute:      #8a8680;   /* truly secondary: labels, copyright */
     }
 
@@ -153,7 +153,7 @@
       font-family: 'Raleway', sans-serif;
       font-weight: 300;
       font-size: clamp(1.6rem, 5.5vw, 3.8rem);
-      letter-spacing: 0.55em;
+      letter-spacing: 0.42em;
       text-transform: uppercase;
       color: #d4a93a;           /* golden amber matching the original */
       line-height: 1;
@@ -161,13 +161,13 @@
     }
 
     .hero-subtitle {
-      margin-top: clamp(0.5rem, 1.5vw, 0.9rem);
+      margin-top: clamp(0.9rem, 2.5vw, 1.5rem);
       font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-style: italic;
       font-size: clamp(1.15rem, 3.4vw, 2.1rem);
       letter-spacing: 0.08em;
-      background: linear-gradient(90deg, #a8d89a, #e2d96a);
+      background: linear-gradient(90deg, #52b838, #d4c832);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -209,11 +209,12 @@
        ABOUT
     ═══════════════════════════════ */
     .about-section {
-      background: var(--navy-mid);
+      background: #ffffff;
       padding: 7rem 2rem;
       text-align: center;
     }
 
+    /* eyebrow + rule defaults (used on dark sections) */
     .section-eyebrow {
       font-size: 0.88rem;
       letter-spacing: 0.26em;
@@ -229,11 +230,20 @@
       margin: 0 auto 1.8rem;
     }
 
+    /* about-section overrides for white background */
+    .about-section .section-eyebrow {
+      color: #6b8c3a;   /* muted olive-green — visible on white, on-brand */
+    }
+
+    .about-section .section-rule {
+      background: linear-gradient(to right, transparent, #6b8c3a, transparent);
+    }
+
     .about-heading {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-size: clamp(1.9rem, 5vw, 3rem);
-      color: var(--cream);
+      color: #0c1e30;   /* deep navy on white */
       letter-spacing: 0.04em;
       line-height: 1.15;
       margin-bottom: 1.6rem;
@@ -244,7 +254,7 @@
       margin: 0 auto;
       font-size: clamp(0.92rem, 2.5vw, 1.02rem);
       line-height: 1.95;
-      color: var(--body);
+      color: #2c2e32;   /* near-black — high contrast on white */
     }
 
     .about-body p + p { margin-top: 1.1em; }
@@ -253,7 +263,7 @@
        FEATURES
     ═══════════════════════════════ */
     .features-section {
-      background: var(--navy);
+      background: #0d2540;   /* faint deep blue — bridges white about → dark navy footer */
       padding: 7rem 2rem;
       text-align: center;
     }
@@ -282,20 +292,68 @@
       margin: 0 auto;
     }
 
+    /* ── base card ── */
     .feature-card {
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 2.8rem 1.6rem 2.2rem;
-      border: 1px solid rgba(200,168,75,0.12);
+      border: 1px solid rgba(255,255,255,0.10);
       border-radius: 14px;
-      background: rgba(255,255,255,0.022);
+      background: rgba(0,0,0,0.25);
       transition: border-color 0.3s, background 0.3s;
     }
 
-    .feature-card:hover {
-      border-color: rgba(200,168,75,0.30);
-      background: rgba(200,168,75,0.038);
+    /* ── Card 1: Watch — midnight sky, gold accent ── */
+    #watch.feature-card {
+      background: #060e1c;
+      border-color: rgba(200,168,75,0.28);
+    }
+    #watch.feature-card:hover {
+      background: #0a1628;
+      border-color: rgba(200,168,75,0.55);
+      box-shadow: 0 6px 28px rgba(200,168,75,0.10);
+    }
+    #watch .feat-icon  { color: #c8a84b; }
+    #watch .feature-cta { color: #c8a84b; border-color: rgba(200,168,75,0.45); }
+    #watch .feature-cta:hover { color: var(--cream); border-color: rgba(237,232,220,0.6); }
+
+    /* ── Card 2: Listen — forest emerald, leaf-green accent ── */
+    #listen.feature-card {
+      background: #061610;
+      border-color: rgba(72,168,48,0.28);
+    }
+    #listen.feature-card:hover {
+      background: #0a1e16;
+      border-color: rgba(72,168,48,0.55);
+      box-shadow: 0 6px 28px rgba(72,168,48,0.10);
+    }
+    #listen .feat-icon           { color: #4eaa36; }
+    #listen .platform-link i     { color: #4eaa36; }
+    #listen .platform-link:hover {
+      background: rgba(78,170,54,0.12);
+      border-color: rgba(78,170,54,0.42);
+      color: var(--cream);
+    }
+
+    /* ── Card 3: Support — lantern warmth, amber accent ── */
+    #community.feature-card {
+      background: #150c04;
+      border-color: rgba(210,148,48,0.28);
+    }
+    #community.feature-card:hover {
+      background: #1e1008;
+      border-color: rgba(210,148,48,0.55);
+      box-shadow: 0 6px 28px rgba(210,148,48,0.10);
+    }
+    #community .feat-icon          { color: #d49030; }
+    #community .feature-cta        { color: #d49030; border-color: rgba(212,144,48,0.45); }
+    #community .feature-cta:hover  { color: var(--cream); border-color: rgba(237,232,220,0.6); }
+    #community .platform-link i    { color: #d49030; }
+    #community .platform-link:hover {
+      background: rgba(212,144,48,0.12);
+      border-color: rgba(212,144,48,0.42);
+      color: var(--cream);
     }
 
     .feat-icon {
@@ -564,18 +622,26 @@
       <!-- Extend the Quiet -->
       <div class="feature-card" id="community">
         <div class="feat-icon" aria-hidden="true">
-          <!-- Chinese lantern SVG -->
+          <!-- Chinese lantern SVG — barrel body -->
           <svg viewBox="0 0 64 64" width="54" height="54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <rect x="30.5" y="2"  width="3" height="8"  rx="1.5"/>
-            <rect x="20"   y="10" width="24" height="5" rx="2.5"/>
-            <ellipse cx="32" cy="33" rx="14" ry="18"/>
-            <ellipse cx="32" cy="33" rx="8"  ry="11" fill="rgba(6,13,26,0.30)"/>
-            <rect x="20"   y="49" width="24" height="5" rx="2.5"/>
-            <rect x="30.5" y="54" width="3" height="8"  rx="1.5"/>
+            <!-- string -->
+            <rect x="30.5" y="1" width="3" height="8" rx="1.5"/>
+            <!-- top cap -->
+            <rect x="18" y="9" width="28" height="5" rx="2.5"/>
+            <!-- barrel body: narrow at top+bottom, bulges wide at centre -->
+            <path d="M24 14 C11 18 9 27 9 32 C9 37 11 46 24 50 L40 50 C53 46 55 37 55 32 C55 27 53 18 40 14 Z"/>
+            <!-- two rib lines so it reads as a paper lantern -->
+            <path d="M28 14 C23 20 22 27 22 32 C22 37 23 44 28 50" stroke="rgba(6,13,26,0.22)" stroke-width="1.8" fill="none"/>
+            <path d="M36 14 C41 20 42 27 42 32 C42 37 41 44 36 50" stroke="rgba(6,13,26,0.22)" stroke-width="1.8" fill="none"/>
+            <!-- bottom cap -->
+            <rect x="18" y="50" width="28" height="5" rx="2.5"/>
+            <!-- tassel -->
+            <rect x="30.5" y="55" width="3" height="5" rx="1.5"/>
+            <ellipse cx="32" cy="62" rx="4.5" ry="3"/>
           </svg>
         </div>
-        <h3 class="feature-title">Extend the Quiet</h3>
-        <p class="feature-desc">Support these stories and keep the lantern lit. Join on Patreon for longer sessions and early access, or offer a simple cup of coffee — every bit of kindness is warmly felt.</p>
+        <h3 class="feature-title">Stillness &amp; Support</h3>
+        <p class="feature-desc">Support these stories and keep the lantern lit. For longer, quieter sessions and early access, there is a place on Patreon, or a small gesture of thanks with a coffee, if you wish.</p>
         <div class="platform-links">
           <a class="platform-link" href="https://www.patreon.com/cw/SuQuietSleep" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-patreon" aria-hidden="true"></i> Join on Patreon
