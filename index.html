@@ -217,6 +217,7 @@
     /* eyebrow + rule defaults (used on dark sections) */
     .section-eyebrow {
       font-size: 0.88rem;
+      font-weight: 700;
       letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--gold);
@@ -241,9 +242,9 @@
 
     .about-heading {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
+      font-weight: 700;
       font-size: clamp(1.9rem, 5vw, 3rem);
-      color: #0c1e30;   /* deep navy on white */
+      color: #0a0a0a;
       letter-spacing: 0.04em;
       line-height: 1.15;
       margin-bottom: 1.6rem;
@@ -263,25 +264,30 @@
        FEATURES
     ═══════════════════════════════ */
     .features-section {
-      background: #0d2540;   /* faint deep blue — bridges white about → dark navy footer */
+      background: #eaf3f9;
       padding: 7rem 2rem;
       text-align: center;
     }
 
     .features-intro { margin-bottom: 4.5rem; }
 
+    .features-section .section-eyebrow { color: #3a7a9c; }
+    .features-section .section-rule {
+      background: linear-gradient(to right, transparent, #3a7a9c, transparent);
+    }
+
     .features-heading {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
+      font-weight: 700;
       font-size: clamp(1.7rem, 4.5vw, 2.6rem);
-      color: var(--cream);
+      color: #0a0a0a;
       letter-spacing: 0.04em;
       margin-bottom: 0.7rem;
     }
 
     .features-sub {
       font-size: clamp(0.85rem, 2.2vw, 0.92rem);
-      color: var(--body);
+      color: #111111;
     }
 
     .features-grid {
@@ -292,67 +298,33 @@
       margin: 0 auto;
     }
 
-    /* ── base card ── */
+    /* ── base card — single moon-sky blue ── */
     .feature-card {
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 2.8rem 1.6rem 2.2rem;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(110,165,210,0.22);
       border-radius: 14px;
-      background: rgba(0,0,0,0.25);
-      transition: border-color 0.3s, background 0.3s;
+      background: #0d2538;
+      transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
     }
 
-    /* ── Card 1: Watch — midnight sky, gold accent ── */
-    #watch.feature-card {
-      background: #060e1c;
-      border-color: rgba(200,168,75,0.28);
-    }
-    #watch.feature-card:hover {
-      background: #0a1628;
-      border-color: rgba(200,168,75,0.55);
-      box-shadow: 0 6px 28px rgba(200,168,75,0.10);
-    }
-    #watch .feat-icon  { color: #c8a84b; }
-    #watch .feature-cta { color: #c8a84b; border-color: rgba(200,168,75,0.45); }
-    #watch .feature-cta:hover { color: var(--cream); border-color: rgba(237,232,220,0.6); }
-
-    /* ── Card 2: Listen — forest emerald, leaf-green accent ── */
-    #listen.feature-card {
-      background: #061610;
-      border-color: rgba(72,168,48,0.28);
-    }
-    #listen.feature-card:hover {
-      background: #0a1e16;
-      border-color: rgba(72,168,48,0.55);
-      box-shadow: 0 6px 28px rgba(72,168,48,0.10);
-    }
-    #listen .feat-icon           { color: #4eaa36; }
-    #listen .platform-link i     { color: #4eaa36; }
-    #listen .platform-link:hover {
-      background: rgba(78,170,54,0.12);
-      border-color: rgba(78,170,54,0.42);
-      color: var(--cream);
+    .feature-card:hover {
+      background: #132e46;
+      border-color: rgba(110,165,210,0.45);
+      box-shadow: 0 6px 32px rgba(70,130,190,0.18);
     }
 
-    /* ── Card 3: Support — lantern warmth, amber accent ── */
-    #community.feature-card {
-      background: #150c04;
-      border-color: rgba(210,148,48,0.28);
-    }
-    #community.feature-card:hover {
-      background: #1e1008;
-      border-color: rgba(210,148,48,0.55);
-      box-shadow: 0 6px 28px rgba(210,148,48,0.10);
-    }
-    #community .feat-icon          { color: #d49030; }
-    #community .feature-cta        { color: #d49030; border-color: rgba(212,144,48,0.45); }
-    #community .feature-cta:hover  { color: var(--cream); border-color: rgba(237,232,220,0.6); }
-    #community .platform-link i    { color: #d49030; }
-    #community .platform-link:hover {
-      background: rgba(212,144,48,0.12);
-      border-color: rgba(212,144,48,0.42);
+    .feat-icon  { color: var(--gold); }
+
+    .feature-cta { color: var(--gold); border-color: rgba(200,168,75,0.40); }
+    .feature-cta:hover { color: var(--cream); border-color: rgba(237,232,220,0.6); }
+
+    .platform-link i { color: var(--gold); }
+    .platform-link:hover {
+      background: rgba(200,168,75,0.10);
+      border-color: rgba(200,168,75,0.38);
       color: var(--cream);
     }
 
@@ -363,7 +335,7 @@
 
     .feature-title {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
+      font-weight: 700;
       font-size: clamp(1.05rem, 3vw, 1.28rem);
       color: var(--cream);
       letter-spacing: 0.03em;
