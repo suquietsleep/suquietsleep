@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Su QuietSleep</title>
+  <meta name="description" content="Sleep Stories from Ancient China — YouTube, Podcast, and more." />
+
+  <meta property="og:title" content="Su QuietSleep" />
+  <meta property="og:description" content="Sleep Stories from Ancient China" />
+  <meta property="og:image" content="img/su_quietsleep_landing.png" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="img/suquietsleep_logo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #060d1a;
+      --navy-mid:  #0a1828;
+      --gold:      #c8a84b;
+      --gold-dim:  #7a6028;
+      --cream:     #ede8dc;
+      --text:      #d5d1c9;   /* main readable text */
+      --body:      #b8b4ac;   /* body paragraphs — legible warm gray */
+      --mute:      #8a8680;   /* truly secondary: labels, copyright */
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ═══════════════════════════════
+       NAV
+    ═══════════════════════════════ */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(to bottom, rgba(6,13,26,0.80) 0%, transparent 100%);
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(6,13,26,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200,168,75,0.10);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .brand-img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(200,168,75,0.45);
+      object-fit: cover;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.75rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ═══════════════════════════════
+       HERO
+    ═══════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 50vh;        /* ~1/3 of a typical screen */
+      min-height: 320px;
+      max-height: 560px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;   /* show the moon + mountain area */
+      opacity: 0.88;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(6,13,26,0.08) 0%,
+        rgba(6,13,26,0.18) 55%,
+        rgba(6,13,26,1.00) 100%
+      );
+    }
+
+    /* text overlay matching the original image style */
+    .hero-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+      padding-top: 3rem;   /* clear the nav */
+    }
+
+    .hero-stories {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 5.5vw, 3.8rem);
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: #d4a93a;           /* golden amber matching the original */
+      line-height: 1;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.55);
+    }
+
+    .hero-subtitle {
+      margin-top: clamp(0.5rem, 1.5vw, 0.9rem);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(1.15rem, 3.4vw, 2.1rem);
+      letter-spacing: 0.08em;
+      background: linear-gradient(90deg, #a8d89a, #e2d96a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+      animation: scrollPulse 2.4s ease-in-out infinite;
+    }
+
+    .scroll-text {
+      font-size: 0.60rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mute);
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.7; }
+      50%       { opacity: 0.2; }
+    }
+
+    /* ═══════════════════════════════
+       ABOUT
+    ═══════════════════════════════ */
+    .about-section {
+      background: var(--navy-mid);
+      padding: 7rem 2rem;
+      text-align: center;
+    }
+
+    .section-eyebrow {
+      font-size: 0.88rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.1rem;
+    }
+
+    .section-rule {
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+      margin: 0 auto 1.8rem;
+    }
+
+    .about-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      margin-bottom: 1.6rem;
+    }
+
+    .about-body {
+      max-width: 580px;
+      margin: 0 auto;
+      font-size: clamp(0.92rem, 2.5vw, 1.02rem);
+      line-height: 1.95;
+      color: var(--body);
+    }
+
+    .about-body p + p { margin-top: 1.1em; }
+
+    /* ═══════════════════════════════
+       FEATURES
+    ═══════════════════════════════ */
+    .features-section {
+      background: var(--navy);
+      padding: 7rem 2rem;
+      text-align: center;
+    }
+
+    .features-intro { margin-bottom: 4.5rem; }
+
+    .features-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.7rem;
+    }
+
+    .features-sub {
+      font-size: clamp(0.85rem, 2.2vw, 0.92rem);
+      color: var(--body);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.8rem 1.6rem 2.2rem;
+      border: 1px solid rgba(200,168,75,0.12);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.022);
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(200,168,75,0.30);
+      background: rgba(200,168,75,0.038);
+    }
+
+    .feat-icon {
+      margin-bottom: 1.6rem;
+      color: var(--gold);
+    }
+
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: clamp(1.05rem, 3vw, 1.28rem);
+      color: var(--cream);
+      letter-spacing: 0.03em;
+      line-height: 1.3;
+      margin-bottom: 0.9rem;
+    }
+
+    .feature-desc {
+      font-size: clamp(0.82rem, 2.2vw, 0.88rem);
+      line-height: 1.85;
+      color: var(--body);
+      margin-bottom: 1.8rem;
+      flex: 1;
+    }
+
+    .feature-cta {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200,168,75,0.40);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .feature-cta:hover { color: var(--cream); border-color: rgba(237,232,220,0.5); }
+
+    .platform-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .platform-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      transition: background 0.22s, border-color 0.22s, color 0.22s;
+    }
+
+    .platform-link:hover {
+      background: rgba(200,168,75,0.10);
+      border-color: rgba(200,168,75,0.35);
+      color: var(--cream);
+    }
+
+    .platform-link i {
+      color: var(--gold);
+      font-size: 0.88rem;
+      width: 1rem;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════
+       FOOTER
+    ═══════════════════════════════ */
+    footer {
+      background: var(--navy-mid);
+      padding: 5rem 2rem 2.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(200,168,75,0.08);
+    }
+
+    .footer-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 3vw, 1.3rem);
+      color: var(--body);
+      max-width: 460px;
+      margin: 0 auto 3rem;
+      line-height: 1.80;
+    }
+
+    .footer-logo {
+      display: block;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(200,168,75,0.35);
+      object-fit: cover;
+      margin: 0 auto 0.85rem;
+    }
+
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      margin-bottom: 1.8rem;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: border-color 0.22s, color 0.22s, background 0.22s;
+    }
+
+    .social-btn:hover {
+      border-color: rgba(200,168,75,0.50);
+      color: var(--gold);
+      background: rgba(200,168,75,0.09);
+    }
+
+    .footer-copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      color: var(--mute);
+    }
+
+    /* ═══════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════ */
+    @media (max-width: 768px) {
+      .features-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .site-header { padding: 0.9rem 1.4rem; }
+      .nav-links { gap: 1.4rem; }
+    }
+
+    @media (max-width: 500px) {
+      .hero { min-height: 260px; }
+      .hero-stories { letter-spacing: 0.30em; }  /* tighten tracking on small screens */
+      .nav-links a { font-size: 0.68rem; letter-spacing: 0.13em; }
+      .about-section, .features-section, footer { padding-left: 1.2rem; padding-right: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#">
+      <img class="brand-img" src="img/suquietsleep_logo.png" alt="" />
+      <span class="brand-name">Su QuietSleep</span>
+    </a>
+    <nav aria-label="Site navigation">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#watch">Watch</a></li>
+        <li><a href="#listen">Listen</a></li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="home">
+    <img class="hero-bg" src="img/su_quietsleep_landing.png" alt="" />
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <p class="hero-stories">Sleep Stories</p>
+      <p class="hero-subtitle">From Ancient China</p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span class="scroll-text">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" class="about-section">
+    <p class="section-eyebrow">A Quiet Space to Rest</p>
+    <div class="section-rule"></div>
+    <h2 class="about-heading">Step into the Quiet World of Ancient China</h2>
+    <div class="about-body">
+      <p>
+        Hello, I’m Su. Welcome to Su QuietSleep — a gentle space where stories inspired by ancient Chinese history help you unwind and drift into rest.
+      </p>
+      <p>
+        Each episode opens into the quiet beauty of life in ancient China: lantern-lit streets, palace gardens, mountain paths, and still evenings from centuries past. The stories draw from different dynasties and moments in time, shaped by calm routines and quiet lives.
+      </p>
+      <p>
+        In a world that often feels busy and loud, these stories offer a small pocket of stillness before sleep — a place to slow down, breathe, and simply rest.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section id="content" class="features-section">
+    <div class="features-intro">
+      <p class="section-eyebrow">For Your Quiet Hours</p>
+      <div class="section-rule"></div>
+      <h2 class="features-heading">Find Your Way In</h2>
+      <p class="features-sub">Choose how you would like to experience Su QuietSleep</p>
+    </div>
+
+    <div class="features-grid">
+
+      <!-- Watch -->
+      <div class="feature-card" id="watch">
+        <div class="feat-icon" aria-hidden="true">
+          <!-- crescent moon (CSS shadow trick) -->
+          <div style="width:52px;height:52px;border-radius:50%;box-shadow:inset -14px -4px 0 var(--gold);"></div>
+        </div>
+        <h3 class="feature-title">Watch Stories Unfold</h3>
+        <p class="feature-desc">Full-length sleep stories with calming visuals on YouTube — let the ancient world appear before you as you close your eyes and drift away.</p>
+        <a class="feature-cta" href="https://www.youtube.com/@SuQuietSleep" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+      </div>
+
+      <!-- Listen -->
+      <div class="feature-card" id="listen">
+        <div class="feat-icon" aria-hidden="true">
+          <!-- headphones SVG -->
+          <svg viewBox="0 0 64 64" width="54" height="54" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 36 C14 21 22 11 32 11 C42 11 50 21 50 36"
+                  stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <rect x="7"  y="34" width="13" height="18" rx="6.5" fill="currentColor"/>
+            <rect x="44" y="34" width="13" height="18" rx="6.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Listen From Your Favourite App</h3>
+        <p class="feature-desc">Available wherever you rest — choose the app that feels most like home and let the stories come to you.</p>
+        <div class="platform-links">
+          <a class="platform-link" href="https://podcasts.apple.com/au/podcast/su-quietsleep/id1888071623" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-apple" aria-hidden="true"></i> Apple Podcasts
+          </a>
+          <a class="platform-link" href="https://open.spotify.com/show/4UhbDoyxyPIG5aG3nXJno6" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-spotify" aria-hidden="true"></i> Spotify
+          </a>
+          <a class="platform-link" href="https://www.iheart.com/podcast/1333-su-quietsleep-328887126/" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-radio" aria-hidden="true"></i> iHeart Radio
+          </a>
+          <a class="platform-link" href="https://rss.com/podcasts/suquietsleep/" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-rss" aria-hidden="true"></i> RSS Feed
+          </a>
+        </div>
+      </div>
+
+      <!-- Extend the Quiet -->
+      <div class="feature-card" id="community">
+        <div class="feat-icon" aria-hidden="true">
+          <!-- Chinese lantern SVG -->
+          <svg viewBox="0 0 64 64" width="54" height="54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30.5" y="2"  width="3" height="8"  rx="1.5"/>
+            <rect x="20"   y="10" width="24" height="5" rx="2.5"/>
+            <ellipse cx="32" cy="33" rx="14" ry="18"/>
+            <ellipse cx="32" cy="33" rx="8"  ry="11" fill="rgba(6,13,26,0.30)"/>
+            <rect x="20"   y="49" width="24" height="5" rx="2.5"/>
+            <rect x="30.5" y="54" width="3" height="8"  rx="1.5"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Extend the Quiet</h3>
+        <p class="feature-desc">Support these stories and keep the lantern lit. Join on Patreon for longer sessions and early access, or offer a simple cup of coffee — every bit of kindness is warmly felt.</p>
+        <div class="platform-links">
+          <a class="platform-link" href="https://www.patreon.com/cw/SuQuietSleep" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-patreon" aria-hidden="true"></i> Join on Patreon
+          </a>
+          <a class="platform-link" href="https://buymeacoffee.com/suquietsleep" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-mug-hot" aria-hidden="true"></i> Buy Me a Coffee
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <p class="footer-quote">
+      &ldquo;Each episode opens into a quiet moment from the past, where the world slows, and the night settles gently around you.&rdquo;
+    </p>
+
+    <img class="footer-logo" src="img/suquietsleep_logo.png" alt="Su QuietSleep" />
+    <p class="footer-name">Su QuietSleep</p>
+
+    <div class="footer-socials">
+      <a class="social-btn" href="https://www.youtube.com/@SuQuietSleep" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <i class="fab fa-youtube" aria-hidden="true"></i>
+      </a>
+      <a class="social-btn" href="https://podcasts.apple.com/au/podcast/su-quietsleep/id1888071623" target="_blank" rel="noopener noreferrer" aria-label="Apple Podcasts">
+        <i class="fab fa-apple" aria-hidden="true"></i>
+      </a>
+      <a class="social-btn" href="https://open.spotify.com/show/4UhbDoyxyPIG5aG3nXJno6" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+        <i class="fab fa-spotify" aria-hidden="true"></i>
+      </a>
+      <a class="social-btn" href="https://www.instagram.com/suquietsleep/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a class="social-btn" href="https://www.patreon.com/cw/SuQuietSleep" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
+        <i class="fab fa-patreon" aria-hidden="true"></i>
+      </a>
+      <a class="social-btn" href="https://buymeacoffee.com/suquietsleep" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">
+        <i class="fas fa-mug-hot" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <p class="footer-copy">&copy; 2026 Su QuietSleep &nbsp;&middot;&nbsp; All rights reserved</p>
+  </footer>
+
+  <script>
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
