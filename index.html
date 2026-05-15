@@ -190,35 +190,6 @@
       color: var(--mute);
     }
 
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(to bottom, var(--gold-dim), transparent);
-      animation: scrollPulse 2.4s ease-in-out infinite;
-    }
-
-    .scroll-text {
-      font-size: 0.60rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--mute);
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.7; }
-      50%       { opacity: 0.2; }
-    }
 
     /* ═══════════════════════════════
        ABOUT
@@ -530,10 +501,6 @@
       <p class="hero-eyebrow">Su QuietSleep</p>
       <p class="hero-subtitle">Sleep Stories From Ancient China</p>
       <p class="hero-byline">By Su Win</p>
-    </div>
-    <div class="scroll-hint" aria-hidden="true">
-      <div class="scroll-line"></div>
-      <span class="scroll-text">Scroll</span>
     </div>
   </section>
 
